@@ -6,7 +6,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("Access Denied.");
 }
 
-$conn = new mysqli("127.0.0.1", "root", "", "user_registration", 3307);
+include 'db_connect.php';
 
 if (isset($_GET['id'])) {
     $product_id = $conn->real_escape_string($_GET['id']);
@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
     $sql = "DELETE FROM products WHERE id = '$product_id'";
     
     if ($conn->query($sql)) {
-        // Send back to your global admin page instantly
+        // Send us back to the global admin page instantly
         header("Location: global_admin.php");
         exit();
     } else {

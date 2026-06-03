@@ -2,27 +2,21 @@
 // Start the session to track who is currently logged in uploading this ad
 session_start();
 
-// 1. Clear any hidden errors by forcing clean reporting
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// 2. Pull the live cloud connection details
 include 'db_connect.php';
 
-// 3. Process form data on submission
+//Process form data on submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Grab the logged-in user's ID from the session. Fallback to 0 if not set.
+    // Grab the logged-in user's ID from the session. 
     $user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0;
     
-    // Safely collect text inputs from the form
+    //safely collect text inputs from the form
     $product_name  = $conn->real_escape_string($_POST['product_name'] ?? '');
     $product_size  = $conn->real_escape_string($_POST['product_size'] ?? ''); // Maps to 'Weight' input
     $product_price = floatval($_POST['product_price'] ?? 0);
     $product_info  = $conn->real_escape_string($_POST['product_description'] ?? '');
     
-    // CAPTURE NEW INTERACTIVE QUANTITY FIELD
+    // capture new interactive qauntity field
     $product_qty   = isset($_POST['product_qty']) ? intval($_POST['product_qty']) : 1;
     
     // Setup target storage directory for product images
@@ -67,12 +61,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $img2 = $uploaded_images[1];
     $img3 = $uploaded_images[2];
 
-    // FIXED: Added user_id field into the SQL map setup to fulfill table requirements
+   
     $sql = "INSERT INTO products (product_name, product_size, product_price, product_info, product_qty, img1, img2, img3, user_id) 
             VALUES ('$product_name', '$product_size', $product_price, '$product_info', $product_qty, '$img1', '$img2', '$img3', $user_id)";
 
     if ($conn->query($sql) === TRUE) {
-        // Successfully posted! Direct seller back to storefront gallery
+        //Ddirect seller back to storefront gallery
         header("Location: shop.html");
         exit();
     } else {

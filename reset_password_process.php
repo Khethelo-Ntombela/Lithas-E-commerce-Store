@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("<p style='color:red; text-align:center; font-family:sans-serif; margin-top:50px;'>Please fill in all fields.</p>");
     }
 
-    // 1. Verify if passwords match before querying the database
+    // Verify if passwords match before querying the database
     if ($new_password !== $confirm_password) {
         die("<div style='text-align:center; font-family:sans-serif; margin-top:50px; color:red;'>
                 <h2>Passwords Do Not Match</h2>
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </div>");
     }
 
-    // 2. Look up the unique account by username
+    // Look up the unique account by username
     $check_sql = "SELECT id FROM users WHERE username = '$username'";
     $result = $conn->query($check_sql);
 

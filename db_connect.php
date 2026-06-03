@@ -8,7 +8,7 @@ $user = "if0_42023814";
 $pass = "Litha2466"; 
 $db   = "if0_42023814_store";
 
-$conn = new mysqli($host, $user, $pass, $db);
+include 'db_connect.php';
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

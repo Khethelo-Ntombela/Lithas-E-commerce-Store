@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['cart'])) {
 $user_id = intval($_SESSION['user_id']);
 $cart_total = 0.00;
 
-// Calculate the total order amount from your live database session cart
+// Calculate the total order amount the live database session cart
 foreach ($_SESSION['cart'] as $product_id => $qty) {
     $sql = "SELECT product_price FROM products WHERE id = $product_id";
     $result = $conn->query($sql);
@@ -20,8 +20,7 @@ foreach ($_SESSION['cart'] as $product_id => $qty) {
     }
 }
 
-// PRODUCTION CONFIG: Replace these placeholder values with your real merchant keys from your PayFast dashboard.
-// Make absolutely sure there are no spaces trailing inside the quotation marks!
+
 $merchant_id  = "31249171"; 
 $merchant_key = " fteuptw2azxey"; 
 

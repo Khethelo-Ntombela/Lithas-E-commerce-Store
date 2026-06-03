@@ -7,7 +7,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Handle removing an item from the cart
+//handle removing an item from the cart
 if (isset($_GET['action']) && $_GET['action'] == 'remove') {
     $id = intval($_GET['id']);
     unset($_SESSION['cart'][$id]);

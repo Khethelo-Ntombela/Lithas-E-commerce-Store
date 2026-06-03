@@ -1,27 +1,27 @@
 <?php
 session_start();
 
-// Security check: Only let admins view this page
+// Security check to only let admins view this page
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.html");
     exit();
 }
 
-$conn = new mysqli("127.0.0.1", "root", "", "user_registration", 3307);
+include 'db_connect.php';
 
-// 1. Fetch Summary Totals for top cards
+//Fetch Summary Totals for top cards
 $total_users = $conn->query("SELECT COUNT(*) as count FROM users WHERE role = 'user'")->fetch_assoc()['count'];
 $total_products = $conn->query("SELECT COUNT(*) as count FROM products")->fetch_assoc()['count'];
 $total_value = $conn->query("SELECT SUM(product_price) as total FROM products")->fetch_assoc()['total'] ?? 0;
 
-// 2. Fetch Users and add up their total item prices
+//Fetch Users and add up their total item prices
 $users_sql = "SELECT users.id, users.username, users.role, SUM(products.product_price) as total_made 
               FROM users 
               LEFT JOIN products ON users.id = products.user_id 
               GROUP BY users.id";
 $users_result = $conn->query($users_sql);
 
-// 3. Fetch All Products across the whole app
+//Fetch All Products across the whole app
 $products_sql = "SELECT products.id, products.product_name, products.product_price, products.created_at, users.username 
                  FROM products 
                  LEFT JOIN users ON products.user_id = users.id 
@@ -59,7 +59,7 @@ $products_result = $conn->query($products_sql);
         <a href="shop.html" class="nav-btn" style="background:#0076bd;">Go to Shop</a>
         <a href="logout.php" class="nav-btn" style="background:red;">Logout</a>
     </span>
-    <h1>Litha's FarmBook - Admin Dashboard</h1>
+    <h1>Litha's Store- Admin Dashboard</h1>
 </header>
 
 <div class="stats-container">

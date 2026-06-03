@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-// 1. Check if the user is actually logged in
+//  Checks if the user is actually logged in
 if (!isset($_SESSION['user_id'])) {
     die("Access Denied. Please log in first.");
 }
 
-// 2. Connect to your database on port 3307
-$conn = new mysqli("127.0.0.1", "root", "", "user_registration", 3307);
+include 'db_connect.php';
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-// 1. If the user doesn't have a basket initialized yet, create an empty array container
+// If the user doesn't have a basket initialized yet,this creates an empty array container
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// 2. Catch the dynamic product ID passed from the shop button URL (?id=X)
+// Catch the dynamic product ID passed from the shop button URL (?id=X)
 if (isset($_GET['id'])) {
     $product_id = intval($_GET['id']); // Clean the ID value to keep it safe
     
@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
         $qty = 1; // Safety fallback to avoid zero or negative additions
     }
     
-    // Check if the product is already in the cart, add the selected quantity if it is
+    // Check if the product is already in the cart - add the selected quantity if it is
     if (isset($_SESSION['cart'][$product_id])) {
         $_SESSION['cart'][$product_id] += $qty;
     } else {

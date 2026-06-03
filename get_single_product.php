@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-$conn = mysqli_connect("localhost:3307", "root", "", "user_registration");
+include 'db_connect.php';
 
 $id = $_GET['id'];
 $sql = "SELECT * FROM products WHERE id = $id";
