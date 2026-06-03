@@ -1,0 +1,102 @@
+<?php
+// Start the session to track your newly registered user
+session_start();
+
+// If they aren't logged in, safely redirect them to the registration/login page
+if (!isset($_SESSION['username'])) {
+    header("Location: index1.html");
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Become a Seller - Litha's FarmBook</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            background-color: #f4f4f4; 
+            padding: 0; 
+            margin: 0; 
+        }
+        header { 
+            background: #004751; 
+            color: white; 
+            padding: 15px 0; 
+            font-size: 20px; 
+            font-weight: bold; 
+        }
+        .form-container { 
+            max-width: 500px; 
+            margin: 80px auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            text-align: center;
+        }
+        h2 { 
+            color: #333; 
+            margin-top: 0; 
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .btn-activate { 
+            background-color: #2ec249; 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+        .btn-activate:hover { 
+            background-color: #25a13c; 
+        }
+        .btn-cancel {
+            color: #2ec249;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .btn-cancel:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">Litha's FarmBook</div>
+</header>
+
+<div class="form-container">
+    <h2>Activate Merchant Dashboard</h2>
+    <p>Hi <strong><?php echo htmlspecialchars($_SESSION['username']); ?></strong>, would you like to upgrade your buyer profile to list and manage your own farm products on the marketplace?</p>
+    
+    <form action="toggle_role.php" method="POST">
+        <div class="button-group">
+            <button type="submit" name="activate_seller" class="btn-activate">Yes, Activate Seller Account</button>
+            <a href="shop.html" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

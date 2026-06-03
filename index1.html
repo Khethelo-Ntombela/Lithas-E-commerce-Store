@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litha's Store- Register</title>
+    <style>
+        * {
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            
+        }
+        body { display: flex; align-items: center; justify-content: center; height: 100vh; background-color: #f0f2f5; }
+        
+        .main-container {
+            display: flex;
+            width: 910px;
+            height: 600px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            
+        form, .register-container {
+            transform: scale(0.9);
+            transform-origin: top center; 
+            margin-bottom: 0; 
+}
+           
+        }
+
+        .left-panel {
+            flex: 1;
+            background: linear-gradient( #6c3483 0%, #a569bd 100%); /* Purple gradient */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+        .left-panel h1 { font-size: 2.5em; margin-bottom: 20px; }
+        .left-panel p { font-size: 1.1em; opacity: 0.8; line-height: 1.5; }
+
+        /* The Right Side (The Form) */
+        .right-panel {
+            flex: 1.2;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .right-panel h2 { color: #333; font-size: 2em; margin-bottom: 30px; }
+        
+        .input-group { margin-bottom: 18px; }
+        .input-group label { display: block; color: #555; margin-bottom: 8px; font-weight: 600; font-size: 0.9em; }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        .input-group input:focus { border-color: #6c3483; outline: none; }
+
+        .btn-register {
+            width: 100%;
+            padding: 15px;
+            background-color: #6c3483; /* Matching purple */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .btn-register:hover { background-color: #512e5f; }
+        .login-link { text-align: center; margin-top: 25px; color: #777; font-size: 0.9em; }
+        .login-link a { color: #6c3483; text-decoration: none; font-weight: bold; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="main-container">
+    <div class="left-panel">
+        <h1>Welcome!</h1>
+        <p>Register and get started with your Ecommerce journey with Litha's Store, your complete shopping solution.</p>
+    </div>
+
+    <div class="right-panel">
+        <h2>Register</h2>
+        <form action="submit.php" method="POST">
+            <div class="input-group">
+                <label>Name</label>
+                <input type="text" name="name" required placeholder="John">
+            </div>
+            <div class="input-group">
+                <label>Surname</label>
+                <input type="text" name="surname" required placeholder="Doe">
+            </div>
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" name="username" required placeholder="johndoe123">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+    <label style="display: block; margin-bottom: 5px;">Date of Birth:</label>
+    <input type="date" name="dob" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+</div>
+
+<div 
+    class="form-group" style="margin-bottom: 15px;">
+    <label style="display: block; 
+           margin-bottom: 5px;">ID Number (SA ID):</label>
+    <input type="text" name="id_number" maxlength="13" minlength="13" placeholder="Enter 13-digit ID" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+
+</div>
+            </div>
+            
+            <button type="submit" class="btn-register">Register</button>
+        </form>
+        
+      <div class="login-link">
+    Already have an account? <a href="login.html">Login here</a>
+</div>
+        
+    </div>
+</div>
+
+</body>
+</html>

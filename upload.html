@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post an Ad - Litha's FarmBook</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            background-color: #f4f4f4; 
+            padding: 20px; 
+            margin: 0; 
+        }
+        header { 
+            background: #004751; 
+            color: white; 
+            padding: 15px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            margin-bottom: 30px; 
+        }
+        .form-container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        h2 { 
+            text-align: center; 
+            color: #004751; 
+            margin-top: 0; 
+            margin-bottom: 25px;
+        }
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold; 
+            color: #333;
+        }
+        input[type="text"], input[type="number"], textarea { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            box-sizing: border-box;
+        }
+        textarea { 
+            height: 100px; 
+            resize: vertical; 
+        }
+        .qty-container { 
+            display: flex; 
+            align-items: center; 
+            gap: 5px; 
+            max-width: 150px; 
+        }
+        .qty-btn { 
+            padding: 8px 15px; 
+            background: #004751; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            cursor: pointer; 
+        }
+        .qty-input { 
+            width: 100%; 
+            padding: 8px; 
+            text-align: center; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .btn-submit { 
+            background-color: #72d54e; 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 10px;
+        }
+        .btn-submit:hover { 
+            background-color: #5cb33e; 
+        }
+        .back-link { 
+            display: block; 
+            text-align: center; 
+            margin-top: 15px; 
+            color: #0076bd; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">Litha's FarmBook</div>
+</header>
+
+<div class="form-container">
+    <h2>Post an Ad</h2>
+    
+    <form action="upload_process.php" method="POST" enctype="multipart/form-data">
+        
+        <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" name="product_name" required placeholder="e.g., Nguni Cow">
+        </div>
+
+        <div class="form-group">
+            <label>Weight</label>
+            <input type="text" name="product_size" placeholder="e.g., 450kg or 20kgs" required>
+        </div>
+
+        <div class="form-group">
+            <label>Quantity Available</label>
+            <div class="qty-container">
+                <button type="button" class="qty-btn" onclick="decrementQty()">-</button>
+                <input type="number" id="quantity_input" name="product_qty" class="qty-input" value="1" min="1" readonly required>
+                <button type="button" class="qty-btn" onclick="incrementQty()">+</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Price (R)</label>
+            <input type="number" name="product_price" step="0.01" required placeholder="e.g., 12500">
+        </div>
+
+        <div class="form-group">
+            <label>Product Description</label>
+            <textarea name="product_description" required placeholder="Describe your livestock or farm produce here..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Photos (Select 3)</label>
+            <input type="file" name="photo1" required style="margin-bottom: 10px;">
+            <input type="file" name="photo2" style="margin-bottom: 10px;">
+            <input type="file" name="photo3" style="margin-bottom: 10px;">
+        </div>
+
+        <div class="form-group">
+            <label>Product Video</label>
+            <input type="file" name="video" accept="video/mp4">
+        </div>
+
+        <button type="submit" class="btn-submit">Upload Product</button>
+    </form>
+
+    <a href="shop.html" class="back-link">← Cancel and Go Back</a>
+</div>
+
+<script>
+    function incrementQty() {
+        const input = document.getElementById('quantity_input');
+        input.value = parseInt(input.value) + 1;
+    }
+
+    function decrementQty() {
+        const input = document.getElementById('quantity_input');
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+</script>
+
+</body>
+</html>
