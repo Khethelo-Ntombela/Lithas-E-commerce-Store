@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Details - Litha's Store</title>
+    <style>
+        body { font-family: sans-serif; background: #eee; padding: 20px; margin: 0; }
+        
+        .form-container { 
+            max-width: 550px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border: 1px solid #ccc; 
+        }
+        h2 { color: #004751; margin-top: 0; margin-bottom: 25px; text-align: center; }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        
+        input[type="text"], select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        
+        .btn-submit { 
+            background-color: #ffa41c; 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            width: 100%; 
+            margin-top: 10px;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+            border-radius: 0; 
+            box-shadow: none; 
+            outline: none;
+        }
+        .btn-submit:hover { background-color: #e08b10; }
+        
+        .back-link { 
+            display: block; 
+            text-align: center; 
+            margin-top: 20px; 
+            color: #004751; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 16px; 
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Delivery Information</h2>
+    
+    <form action="checkout.php" method="POST">
+        
+        <div class="form-group">
+            <label>Street Address</label>
+            <input type="text" name="delivery_address" required>
+        </div>
+
+        <div class="form-group">
+            <label>City / Town</label>
+            <input type="text" name="delivery_city" required>
+        </div>
+
+        <div class="form-group">
+            <label>Province</label>
+            <select name="delivery_province" required>
+                <option value="">-- Select Province --</option>
+                <option value="Gauteng">Gauteng</option>
+                <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                <option value="Western Cape">Western Cape</option>
+                <option value="Eastern Cape">Eastern Cape</option>
+                <option value="Free State">Free State</option>
+                <option value="Limpopo">Limpopo</option>
+                <option value="Mpumalanga">Mpumalanga</option>
+                <option value="North West">North West</option>
+                <option value="Northern Cape">Northern Cape</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Postal Code</label>
+            <input type="text" name="delivery_zip" required pattern="[0-9]{4}">
+        </div>
+
+        <button type="submit" class="btn-submit">Proceed to Finalize Order</button>
+    </form>
+
+    <a href="view_cart.php" class="back-link">← Return to Cart</a>
+</div>
+
+</body>
+</html>
