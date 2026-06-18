@@ -1,57 +1,3 @@
-<?php
-// Start session to track messages
-session_start();
-
-// Include your central database connection settings file
-require_once 'db_connect.php';
-
-$message = "";
-$message_class = "";
-
-// Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize user inputs matching the 'name' attributes in your HTML form
-    $username = trim($_POST['username']);
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
-
-    // Basic Validation Checks
-    if (empty($username) || empty($new_password) || empty($confirm_password)) {
-        $message = "Please fill in all fields.";
-        $message_class = "error";
-    } elseif ($new_password !== $confirm_password) {
-        $message = "Passwords do not match!";
-        $message_class = "error";
-    } else {
-        // Check if the username exists in the users table
-        $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 0) {
-            $message = "Username not found in our system.";
-            $message_class = "error";
-        } else {
-            // Update password directly using safe SQL statements
-            $update_stmt = $conn->prepare("UPDATE users SET password = ? WHERE username = ?");
-            $update_stmt->bind_param("ss", $new_password, $username);
-
-            if ($update_stmt->execute()) {
-                $message = "Password reset successfully! Redirecting to login...";
-                $message_class = "success";
-                // Redirect back to login page after 2 seconds
-                header("refresh:2;url=login.html");
-            } else {
-                $message = "Something went wrong. Please try again.";
-                $message_class = "error";
-            }
-            $update_stmt->close();
-        }
-        $stmt->close();
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column; /* Allows alert message to stack nicely */
         }
 
         .reset-box { 
@@ -148,35 +93,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .links a:hover {
             text-decoration: underline;
         }
-
-        /* Added clean alert styles to match your UI format */
-        .alert {
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            text-align: center;
-            font-size: 14px;
-            width: 100%;
-            max-width: 420px;
-        }
-        .error { background-color: #fde8e8; color: #9b1c1c; border: 1px solid #f8b4b4; }
-        .success { background-color: #def7ec; color: #03543f; border: 1px solid #bcf0da; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<?php if (!empty($message)): ?>
-    <div class="alert <?php echo $message_class; ?>">
-        <?php echo $message; ?>
-    </div>
-<?php endif; ?>
-
 <div class="reset-box">
     <h2>Reset Your Password</h2>
     
-    <form action="reset_password.php" method="POST">
+    <form action="reset_password_process.php" method="POST">
         <div class="input-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="Enter your username" required>

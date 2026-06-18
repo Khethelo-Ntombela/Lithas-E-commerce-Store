@@ -1,0 +1,25 @@
+<?php
+include 'db_connect.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = mysqli_real_escape_string($conn, $_POST['name'] ?? '');
+    $email = mysqli_real_escape_string($conn, $_POST['email'] ?? '');
+    $issue_type = mysqli_real_escape_string($conn, $_POST['issue_type'] ?? '');
+    $message = mysqli_real_escape_string($conn, $_POST['message'] ?? '');
+
+    // Write directly into the local support table
+    $sql = "INSERT INTO support_tickets (full_name, email, nature_of_inquiry, message, status) 
+            VALUES ('$name', '$email', '$issue_type', '$message', 'Pending')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "<script>
+                alert('Your support request has been sent to the Admin Desk successfully!');
+                window.location.href='shop.html';
+              </script>";
+        exit();
+    } else {
+        echo "Error logging support ticket: " . mysqli_error($conn);
+    }
+}
+mysqli_close($conn);
+?>

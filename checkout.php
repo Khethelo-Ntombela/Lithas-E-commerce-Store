@@ -10,19 +10,28 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['cart'])) {
 
 $user_id = intval($_SESSION['user_id']);
 $cart_total = 0.00;
+$summary_text = "";
 
-// Calculate the total order amount the live database session cart
+// Calculate the total order amount from your live database session cart and generate summary
 foreach ($_SESSION['cart'] as $product_id => $qty) {
-    $sql = "SELECT product_price FROM products WHERE id = $product_id";
+    $clean_id = intval($product_id);
+    $quantity = intval($qty);
+    
+    $sql = "SELECT product_name, product_price FROM products WHERE id = $clean_id";
     $result = $conn->query($sql);
     if ($result && $row = $result->fetch_assoc()) {
-        $cart_total += (floatval($row['product_price']) * intval($qty));
+        $price = floatval($row['product_price']);
+        $subtotal = $price * $quantity;
+        $cart_total += $subtotal;
+        
+        // Build clear line summary entries
+        $summary_text .= $quantity . " x " . $row['product_name'] . " (R " . number_format($price, 2) . " each) - Subtotal: R " . number_format($subtotal, 2) . "\n";
     }
 }
 
-
-$merchant_id  = "31249171"; 
-$merchant_key = " fteuptw2azxey"; 
+// TEMPORARY SANDBOX TEST CONFIG: Points to PayFast's open test accounts
+$merchant_id  = "10000100"; 
+$merchant_key = "46f0cd694581a"; 
 
 // Create a unique tracking reference for this specific sale order
 $order_id = time() . "_" . $user_id;
@@ -45,30 +54,27 @@ $order_id = time() . "_" . $user_id;
 <body>
 
 <div class="payment-box">
-    <h2>Secure Checkout</h2>
+    <h2>Secure Checkout (Sandbox Mode)</h2>
     <p>Your livestock and produce order reference: <strong><?php echo $order_id; ?></strong></p>
     <div class="total-amount">Total Due: R <?php echo number_format($cart_total, 2); ?></div>
 
-    <!-- LIVE PRODUCTION GATEWAY: Switched endpoint to the authentic live engine -->
-    <form action="https://www.payfast.co.za/eng/process" method="POST">
-        <!-- Live Identification Tokens -->
+    <form action="https://sandbox.payfast.co.za/eng/process" method="POST">
         <input type="hidden" name="merchant_id" value="<?php echo $merchant_id; ?>">
         <input type="hidden" name="merchant_key" value="<?php echo $merchant_key; ?>">
 
-        <!-- Live Destination Redirection Endpoints -->
         <input type="hidden" name="return_url" value="https://lithas-store.infinityfreeapp.com/order_sucess.php?id=<?php echo $order_id; ?>">
         <input type="hidden" name="cancel_url" value="https://lithas-store.infinityfreeapp.com/view_cart.php">
         <input type="hidden" name="notify_url" value="https://lithas-store.infinityfreeapp.com/process_payment.php">
 
-        <!-- Core Transaction Value Details Mapping -->
         <input type="hidden" name="m_payment_id" value="<?php echo $order_id; ?>">
         <input type="hidden" name="amount" value="<?php echo number_format($cart_total, 2, '.', ''); ?>">
         <input type="hidden" name="item_name" value="Litha's Store Order #<?php echo $order_id; ?>">
 
-        <!-- Buyer details field required for real account tracking -->
         <input type="hidden" name="email_address" value="ntombelakhethelo15@gmail.com">
 
-        <button type="submit" class="btn-pay">💳 Pay Securely with PayFast</button>
+        <input type="hidden" name="custom_str1" value="<?php echo htmlspecialchars(trim($summary_text)); ?>">
+
+        <button type="submit" class="btn-pay">💳 Pay Securely with PayFast Sandbox</button>
     </form>
 </div>
 

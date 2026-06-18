@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Litha's Store</title>
     <style>
-      
         body { font-family: sans-serif; margin: 0; background: #f4f4f4; }
-        
         header { 
             background: #004751; 
             color: white; 
@@ -14,19 +12,14 @@
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            flex-wrap: wrap; /*helps with responsiveness */
+            flex-wrap: wrap;
         }
-
         .search-area input { padding: 8px; width: 300px; border: none; border-radius: 4px 0 0 4px; }
         .search-btn { background:#72d54e; border:none; color:white; padding:8px 15px; cursor:pointer; border-radius: 0 4px 4px 0; }
-        
         .nav-links { display: flex; align-items: center; gap: 15px; }
         .post-btn { background: #72d54e; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; }
         .logout-link { color: #ff4d4d; text-decoration: none; font-weight: bold; font-size: 14px; }
-
-        /*THE GRID */
         .content { padding: 20px; text-align: center; min-height: 400px; }
-
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -35,8 +28,6 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        /*THE CARD*/
         .product-card { 
             background: white; 
             border: 1px solid #ddd; 
@@ -50,79 +41,33 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        
         .product-card:hover { transform: translateY(-5px); }
-
-        .product-card img { 
-            width: 100%; 
-            height: 180px; 
-            object-fit: contain; 
-            background: #fff;
-            margin-bottom: 10px; 
-        }
-
-        .badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #0076bd;
-            color: white;
-            padding: 5px;
-            font-size: 11px;
-            font-weight: bold;
-            border-radius: 3px;
-            z-index: 10;
-        }
-
-        .product-title {
-            font-size: 14px;
-            font-weight: normal;
-            height: 40px;
-            overflow: hidden;
-            margin: 10px 0;
-            color: #333;
-        }
-
+        .product-card img { width: 100%; height: 180px; object-fit: contain; background: #fff; margin-bottom: 10px; }
+        .badge { position: absolute; top: 10px; left: 10px; background: #0076bd; color: white; padding: 5px; font-size: 11px; font-weight: bold; border-radius: 3px; z-index: 10; }
+        .product-title { font-size: 14px; font-weight: normal; height: 40px; overflow: hidden; margin: 10px 0; color: #333; }
         .price-tag { font-size: 18px; font-weight: bold; color: #000; margin-bottom: 10px; }
-        .rating { display: none; }
-
-        /* Inline button formatting for card alignment */
-        .card-add-btn {
-            background: #ffa41c;
-            color: white;
-            text-align: center;
-            padding: 8px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 13px;
-            margin-top: auto;
-            transition: 0.2s;
-        }
+        .card-add-btn { background: #ffa41c; color: white; text-align: center; padding: 8px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; margin-top: auto; transition: 0.2s; }
         .card-add-btn:hover { background: #e08b10; }
-        
-        /*RESPONSIVE QUERIES */
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; text-align: center; }
             .search-area input { width: 200px; }
         }
-
         footer { background: #3e3347; color: white; padding: 30px; text-align: center; margin-top: 50px; }
         .footer-links a { color: #ccc; margin: 0 10px; text-decoration: none; font-size: 14px; }
+        .footer-links a:hover { color: #72d54e; text-decoration: underline; }
     </style>
 </head>
 <body>
 
 <header>
-    <div style="font-size: 20px; font-weight: bold;">Litha's FarmBook</div>
-    
+    <div style="font-size: 20px; font-weight: bold;">Litha's Store</div>
     <div class="search-area">
         <input type="text" placeholder="Search products...">
         <button class="search-btn">Search</button>
     </div>
-    
     <div class="nav-links">
         <a href="view_cart.php" class="post-btn" style="background: #ffa41c;">🛒 View Cart</a>
+        <a href="orders.php" class="post-btn" style="background: #0076bd;">📦 My Orders</a>
         <a href="dashboard.php" id="dashboard-btn" class="post-btn" style="background: #0076bd; display: none;">My Dashboard</a> 
         <a href="become_seller.html" class="post-btn">Upload a Product</a>
         <a href="logout.php" class="logout-link">Logout</a>
@@ -131,7 +76,6 @@
 
 <div class="content">
     <h2 style="text-align: left; max-width: 1200px; margin: 20px auto;">Available Products</h2>
-    
     <div id="product-list" class="product-grid">
         <p>Loading products...</p>
     </div>
@@ -139,24 +83,23 @@
 
 <footer>
     <div class="footer-links">
-        <a href="#">Privacy Policy</a> | 
-        <a href="#">Terms & Conditions</a> | 
-        <a href="#">Contact Us</a>
+        <!-- LINK REPLACEMENTS ALL UPDATED RIGHT HERE -->
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="terms.html">Terms & Conditions</a> | 
+        <a href="contact.html">Contact Us</a>
     </div>
-    <p style="font-size: 12px; color: #bbb; margin-top: 15px;">&copy; 2026 Litha's FarmBook - Midrand</p>
+    <p style="font-size: 12px; color: #bbb; margin-top: 15px;">&copy; 2026 Litha's Store - Midrand</p>
 </footer>
 
 <script>
-    //Function updated with complete absolute domain linkages
     async function loadProducts(searchQuery = '') {
         try {
             const url = searchQuery 
-                ? `http://lithas-store.infinityfreeapp.com/get_products.php?search=${encodeURIComponent(searchQuery)}` 
-                : 'http://lithas-store.infinityfreeapp.com/get_products.php';
+                ? `get_products.php?search=${encodeURIComponent(searchQuery)}` 
+                : 'get_products.php';
             
             const response = await fetch(url);
             const products = await response.json();
-            
             const container = document.getElementById('product-list');
             container.innerHTML = ''; 
 
@@ -174,7 +117,6 @@
                         <h3 class="product-title">${product.product_name}</h3>
                         <div class="price-tag">R ${parseFloat(product.product_price).toLocaleString()}</div>
                     </a>
-                    
                     <a href="add_to_cart.php?id=${product.id}" class="card-add-btn">🛒 Add to Cart</a>
                 </div>
                 `;
@@ -186,35 +128,26 @@
         }
     }
 
-    // 2. Wire up initialization handlers upon load completion
     window.onload = function() {
-        // Run initial catalog loading sequences
         loadProducts();
 
-        // Verification call pointed securely at the absolute production resource route
-        fetch('http://lithas-store.infinityfreeapp.com/check_seller_status.php')
+        fetch('check_seller_status.php')
             .then(response => response.json())
             .then(data => {
                 if (data.is_seller === true) {
                     document.getElementById('dashboard-btn').style.display = 'inline-block';
                 }
             })
-            .catch(err => console.error('Error verifying seller status identity:', err));
+            .catch(err => console.error('Error verification:', err));
 
         const searchInput = document.querySelector('.search-area input');
         const searchBtn = document.querySelector('.search-btn');
 
-        searchBtn.addEventListener('click', () => {
-            loadProducts(searchInput.value);
-        });
-
+        searchBtn.addEventListener('click', () => { loadProducts(searchInput.value); });
         searchInput.addEventListener('keyup', (event) => {
-            if (event.key === 'Enter') {
-                loadProducts(searchInput.value);
-            }
+            if (event.key === 'Enter') { loadProducts(searchInput.value); }
         });
     };
 </script>
-
 </body>
 </html>
