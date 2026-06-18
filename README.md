@@ -1,4 +1,5 @@
 **Litha's Store**
+
 A lightweight, robust e-commerce platform designed to streamline online retail operations, product management, and customer transactions.
 
 **Features:**
